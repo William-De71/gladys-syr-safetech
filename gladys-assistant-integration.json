@@ -1,0 +1,1203 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "SYR SafeTech",
+  "description": {
+    "en": "SYR leak protection on the local network: shut-off valve, leaks, flow, water used.",
+    "fr": "Protection anti-fuite SYR en local : vanne d’arrêt, fuites, débit, eau consommée.",
+    "de": "SYR-Leckageschutz im lokalen Netz: Absperrventil, Lecks, Durchfluss, Wasserverbrauch.",
+    "es": "Protección antifugas SYR en red local: válvula de corte, fugas, caudal, agua consumida."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/william-de71/gladys-syr-safetech:0.1.0",
+  "gladys_version": ">=5.3.0",
+  "categories": ["security", "appliances"],
+  "keywords": [
+    "SYR",
+    "SafeTech",
+    "Trio DFR",
+    "Pontos",
+    "Hansgrohe",
+    "Leckageschutz",
+    "anti-fuite",
+    "water leak",
+    "Wasserwächter",
+    "Sasserath"
+  ],
+  "cover_image": "https://raw.githubusercontent.com/William-De71/gladys-syr-safetech/main/cover.jpg",
+  "transports": ["local"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Your SYR device",
+        "fr": "Votre appareil SYR",
+        "de": "Dein SYR-Gerät",
+        "es": "Su equipo SYR"
+      },
+      "description": {
+        "en": "The integration talks to your SYR leak protection device over the local network, through its local API (port 5333): nothing leaves your home. It works with the SafeTech Connect, SafeTech+, Trio DFR/LS, SafeTech Lock, TRIO Lock and Hansgrohe Pontos Base (older Safe-T+ and LEX devices have no local API). The device does not announce itself: type its IP address and give it a fixed one in your internet box. Not affiliated with SYR (Hans Sasserath).",
+        "fr": "L’intégration dialogue avec votre protection anti-fuite SYR sur le réseau local, par son API locale (port 5333) : rien ne sort de chez vous. Elle fonctionne avec les SafeTech Connect, SafeTech+, Trio DFR/LS, SafeTech Lock, TRIO Lock et Hansgrohe Pontos Base (les anciens Safe-T+ et LEX n’ont pas d’API locale). L’appareil ne s’annonce pas : saisissez son adresse IP et fixez-la dans votre box internet. Non affiliée à SYR (Hans Sasserath).",
+        "de": "Die Integration spricht mit deinem SYR-Leckageschutz über das lokale Netzwerk, über seine lokale API (Port 5333): Nichts verlässt dein Zuhause. Sie funktioniert mit SafeTech Connect, SafeTech+, Trio DFR/LS, SafeTech Lock, TRIO Lock und Hansgrohe Pontos Base (ältere Safe-T+ und LEX haben keine lokale API). Das Gerät meldet sich nicht im Netzwerk an: Gib seine IP-Adresse ein und lege sie in deinem Router fest. Nicht mit SYR (Hans Sasserath) verbunden.",
+        "es": "La integración se comunica con su protección antifugas SYR por la red local, mediante su API local (puerto 5333): nada sale de su casa. Funciona con SafeTech Connect, SafeTech+, Trio DFR/LS, SafeTech Lock, TRIO Lock y Hansgrohe Pontos Base (los antiguos Safe-T+ y LEX no tienen API local). El equipo no se anuncia en la red: introduzca su dirección IP y fíjela en su router de internet. No afiliada a SYR (Hans Sasserath)."
+      },
+      "links": [
+        {
+          "url": "https://www.syr.de/en/",
+          "label": {
+            "en": "SYR website",
+            "fr": "Site de SYR",
+            "de": "SYR-Website",
+            "es": "Web de SYR"
+          }
+        }
+      ]
+    },
+    {
+      "key": "hosts",
+      "type": "string",
+      "required": true,
+      "label": {
+        "en": "Device addresses",
+        "fr": "Adresses des appareils",
+        "de": "Geräteadressen",
+        "es": "Direcciones de los equipos"
+      },
+      "description": {
+        "en": "IP addresses or names of your SYR devices, separated by commas (a port after “:” if it is not 5333).",
+        "fr": "Adresses IP ou noms de vos appareils SYR, séparés par des virgules (un port après « : » s’il n’est pas 5333).",
+        "de": "IP-Adressen oder Namen deiner SYR-Geräte, durch Kommas getrennt (ein Port nach „:“, wenn es nicht 5333 ist).",
+        "es": "Direcciones IP o nombres de sus equipos SYR, separados por comas (un puerto tras «:» si no es el 5333)."
+      },
+      "placeholder": {
+        "en": "192.168.1.40",
+        "fr": "192.168.1.40",
+        "de": "192.168.1.40",
+        "es": "192.168.1.40"
+      }
+    },
+    {
+      "key": "options",
+      "type": "section",
+      "label": {
+        "en": "Options",
+        "fr": "Options",
+        "de": "Optionen",
+        "es": "Opciones"
+      }
+    },
+    {
+      "key": "interval",
+      "type": "select",
+      "default": "30",
+      "label": {
+        "en": "Reading",
+        "fr": "Lecture",
+        "de": "Abfrage",
+        "es": "Lectura"
+      },
+      "description": {
+        "en": "How often the devices are read.",
+        "fr": "Fréquence de lecture des appareils.",
+        "de": "Wie oft die Geräte abgefragt werden.",
+        "es": "Frecuencia de lectura de los equipos."
+      },
+      "options": [
+        {
+          "value": "10",
+          "label": {
+            "en": "Every 10 seconds",
+            "fr": "Toutes les 10 secondes",
+            "de": "Alle 10 Sekunden",
+            "es": "Cada 10 segundos"
+          }
+        },
+        {
+          "value": "30",
+          "label": {
+            "en": "Every 30 seconds",
+            "fr": "Toutes les 30 secondes",
+            "de": "Alle 30 Sekunden",
+            "es": "Cada 30 segundos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "Every minute",
+            "fr": "Toutes les minutes",
+            "de": "Jede Minute",
+            "es": "Cada minuto"
+          }
+        }
+      ]
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "default": "auto",
+      "label": {
+        "en": "Language of the texts",
+        "fr": "Langue des textes",
+        "de": "Sprache der Texte",
+        "es": "Idioma de los textos"
+      },
+      "description": {
+        "en": "Feature names, scene texts and errors. Automatic: the language of the last widget shown.",
+        "fr": "Noms des fonctionnalités, textes des scènes et erreurs. Automatique : la langue du dernier widget affiché.",
+        "de": "Namen der Funktionen, Szenentexte und Fehler. Automatisch: die Sprache des zuletzt angezeigten Widgets.",
+        "es": "Nombres de las funciones, textos de escenas y errores. Automático: el idioma del último widget mostrado."
+      },
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Automatic",
+            "fr": "Automatique",
+            "de": "Automatisch",
+            "es": "Automático"
+          }
+        },
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "English",
+            "de": "English",
+            "es": "English"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "Français",
+            "fr": "Français",
+            "de": "Français",
+            "es": "Français"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "Deutsch",
+            "fr": "Deutsch",
+            "de": "Deutsch",
+            "es": "Deutsch"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Español",
+            "fr": "Español",
+            "de": "Español",
+            "es": "Español"
+          }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "key": "search",
+      "timeout_seconds": 60,
+      "label": {
+        "en": "Search and test",
+        "fr": "Rechercher et tester",
+        "de": "Suchen und testen",
+        "es": "Buscar y probar"
+      },
+      "description": {
+        "en": "Reads the devices at the addresses typed and offers them on the Discover screen.",
+        "fr": "Lit les appareils aux adresses saisies et les propose dans l’écran Découverte.",
+        "de": "Liest die Geräte unter den eingegebenen Adressen und bietet sie im Bildschirm Entdecken an.",
+        "es": "Lee los equipos en las direcciones introducidas y los ofrece en la pantalla Descubrir."
+      }
+    },
+    {
+      "key": "diagnostic",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "Diagnostic",
+        "fr": "Diagnostic",
+        "de": "Diagnose",
+        "es": "Diagnóstico"
+      },
+      "description": {
+        "en": "Writes what the integration knows to its logs, for a bug report.",
+        "fr": "Écrit ce que sait l’intégration dans ses journaux, pour un signalement de bug.",
+        "de": "Schreibt, was die Integration weiß, in ihre Protokolle, für einen Fehlerbericht.",
+        "es": "Escribe lo que sabe la integración en sus registros, para un informe de error."
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "key": "overview",
+      "label": {
+        "en": "Leak protection",
+        "fr": "Anti-fuite",
+        "de": "Leckageschutz",
+        "es": "Antifugas"
+      },
+      "description": {
+        "en": "Flow, pressure, water used today, valve, alarm, profile, and buttons to shut the water off.",
+        "fr": "Débit, pression, eau du jour, vanne, alarme, profil, et boutons pour couper l’eau.",
+        "de": "Durchfluss, Druck, Wasser heute, Ventil, Alarm, Profil und Tasten zum Absperren.",
+        "es": "Caudal, presión, agua de hoy, válvula, alarma, perfil y botones para cortar el agua."
+      },
+      "icon": "droplet",
+      "settings": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for the first one.",
+            "fr": "L’appareil SYR. Laissez vide pour le premier.",
+            "de": "Das SYR-Gerät. Leer lassen für das erste.",
+            "es": "El equipo SYR. Déjelo vacío para el primero."
+          }
+        }
+      ]
+    },
+    {
+      "key": "consumption",
+      "label": {
+        "en": "Water per day",
+        "fr": "Eau par jour",
+        "de": "Wasser pro Tag",
+        "es": "Agua por día"
+      },
+      "description": {
+        "en": "Water used each of the last 14 days, today and the daily average.",
+        "fr": "Eau consommée chacun des 14 derniers jours, aujourd’hui et la moyenne par jour.",
+        "de": "Wasserverbrauch der letzten 14 Tage, heute und der Tagesdurchschnitt.",
+        "es": "Agua consumida en cada uno de los últimos 14 días, hoy y la media diaria."
+      },
+      "icon": "bar-chart-2",
+      "settings": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for the first one.",
+            "fr": "L’appareil SYR. Laissez vide pour le premier.",
+            "de": "Das SYR-Gerät. Leer lassen für das erste.",
+            "es": "El equipo SYR. Déjelo vacío para el primero."
+          }
+        }
+      ]
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "leak_detected",
+      "label": {
+        "en": "SYR: leak detected",
+        "fr": "SYR : fuite détectée",
+        "de": "SYR: Leck erkannt",
+        "es": "SYR: fuga detectada"
+      },
+      "description": {
+        "en": "A leak alarm went off (volume, duration or flow limit, microleak, floor sensor). The device has usually shut the water off by itself.",
+        "fr": "Une alarme de fuite s’est déclenchée (volume, durée ou débit maximal, micro-fuite, capteur de sol). L’appareil a en général déjà coupé l’eau.",
+        "de": "Ein Leckalarm wurde ausgelöst (Mengen-, Zeit- oder Durchflussgrenze, Mikroleckage, Bodensensor). Das Gerät hat das Wasser meist schon selbst abgesperrt.",
+        "es": "Se ha disparado una alarma de fuga (volumen, duración o caudal máximo, microfuga, sensor de suelo). El equipo suele haber cortado ya el agua."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for any device.",
+            "fr": "L’appareil SYR. Laissez vide pour n’importe lequel.",
+            "de": "Das SYR-Gerät. Leer lassen für jedes Gerät.",
+            "es": "El equipo SYR. Déjelo vacío para cualquiera."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "code",
+          "type": "string",
+          "label": {
+            "en": "Code",
+            "fr": "Code",
+            "de": "Code",
+            "es": "Código"
+          }
+        },
+        {
+          "key": "alarm",
+          "type": "string",
+          "label": {
+            "en": "Alarm",
+            "fr": "Alarme",
+            "de": "Alarm",
+            "es": "Alarma"
+          }
+        },
+        {
+          "key": "leak",
+          "type": "boolean",
+          "label": {
+            "en": "Is a leak",
+            "fr": "Est une fuite",
+            "de": "Ist ein Leck",
+            "es": "Es una fuga"
+          }
+        },
+        {
+          "key": "valve_closed",
+          "type": "boolean",
+          "label": {
+            "en": "Water shut off",
+            "fr": "Eau coupée",
+            "de": "Wasser abgesperrt",
+            "es": "Agua cortada"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Nachricht",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    },
+    {
+      "key": "alarm_raised",
+      "label": {
+        "en": "SYR: alarm",
+        "fr": "SYR : alarme",
+        "de": "SYR: Alarm",
+        "es": "SYR: alarma"
+      },
+      "description": {
+        "en": "Any alarm went off: a leak, or a fault (sensor, valve, battery, power).",
+        "fr": "Une alarme s’est déclenchée : une fuite, ou un défaut (capteur, vanne, batterie, alimentation).",
+        "de": "Ein Alarm wurde ausgelöst: ein Leck oder ein Fehler (Sensor, Ventil, Batterie, Strom).",
+        "es": "Se ha disparado una alarma: una fuga o un fallo (sensor, válvula, batería, alimentación)."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for any device.",
+            "fr": "L’appareil SYR. Laissez vide pour n’importe lequel.",
+            "de": "Das SYR-Gerät. Leer lassen für jedes Gerät.",
+            "es": "El equipo SYR. Déjelo vacío para cualquiera."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "code",
+          "type": "string",
+          "label": {
+            "en": "Code",
+            "fr": "Code",
+            "de": "Code",
+            "es": "Código"
+          }
+        },
+        {
+          "key": "alarm",
+          "type": "string",
+          "label": {
+            "en": "Alarm",
+            "fr": "Alarme",
+            "de": "Alarm",
+            "es": "Alarma"
+          }
+        },
+        {
+          "key": "leak",
+          "type": "boolean",
+          "label": {
+            "en": "Is a leak",
+            "fr": "Est une fuite",
+            "de": "Ist ein Leck",
+            "es": "Es una fuga"
+          }
+        },
+        {
+          "key": "valve_closed",
+          "type": "boolean",
+          "label": {
+            "en": "Water shut off",
+            "fr": "Eau coupée",
+            "de": "Wasser abgesperrt",
+            "es": "Agua cortada"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Nachricht",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    },
+    {
+      "key": "alarm_cleared",
+      "label": {
+        "en": "SYR: alarm over",
+        "fr": "SYR : alarme terminée",
+        "de": "SYR: Alarm vorbei",
+        "es": "SYR: alarma terminada"
+      },
+      "description": {
+        "en": "The alarm went away (cleared on the device or in its app). Not fired when Gladys clears it.",
+        "fr": "L’alarme a disparu (acquittée sur l’appareil ou dans son appli). Pas déclenché quand Gladys l’acquitte.",
+        "de": "Der Alarm ist weg (am Gerät oder in seiner App quittiert). Nicht ausgelöst, wenn Gladys ihn quittiert.",
+        "es": "La alarma ha desaparecido (borrada en el equipo o en su app). No se dispara cuando la borra Gladys."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for any device.",
+            "fr": "L’appareil SYR. Laissez vide pour n’importe lequel.",
+            "de": "Das SYR-Gerät. Leer lassen für jedes Gerät.",
+            "es": "El equipo SYR. Déjelo vacío para cualquiera."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "code",
+          "type": "string",
+          "label": {
+            "en": "Code",
+            "fr": "Code",
+            "de": "Code",
+            "es": "Código"
+          }
+        },
+        {
+          "key": "alarm",
+          "type": "string",
+          "label": {
+            "en": "Alarm",
+            "fr": "Alarme",
+            "de": "Alarm",
+            "es": "Alarma"
+          }
+        },
+        {
+          "key": "leak",
+          "type": "boolean",
+          "label": {
+            "en": "Is a leak",
+            "fr": "Est une fuite",
+            "de": "Ist ein Leck",
+            "es": "Es una fuga"
+          }
+        },
+        {
+          "key": "valve_closed",
+          "type": "boolean",
+          "label": {
+            "en": "Water shut off",
+            "fr": "Eau coupée",
+            "de": "Wasser abgesperrt",
+            "es": "Agua cortada"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Nachricht",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    },
+    {
+      "key": "warning_raised",
+      "label": {
+        "en": "SYR: warning",
+        "fr": "SYR : avertissement",
+        "de": "SYR: Warnung",
+        "es": "SYR: aviso"
+      },
+      "description": {
+        "en": "A warning came up: power cut, battery, leak warning before the shut-off… (newer devices only).",
+        "fr": "Un avertissement est apparu : coupure de courant, batterie, alerte de fuite avant coupure… (appareils récents seulement).",
+        "de": "Eine Warnung ist aufgetreten: Stromausfall, Batterie, Leckwarnung vor dem Absperren… (nur neuere Geräte).",
+        "es": "Ha aparecido un aviso: corte de corriente, batería, aviso de fuga antes del corte… (solo equipos recientes)."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for any device.",
+            "fr": "L’appareil SYR. Laissez vide pour n’importe lequel.",
+            "de": "Das SYR-Gerät. Leer lassen für jedes Gerät.",
+            "es": "El equipo SYR. Déjelo vacío para cualquiera."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "code",
+          "type": "string",
+          "label": {
+            "en": "Code",
+            "fr": "Code",
+            "de": "Code",
+            "es": "Código"
+          }
+        },
+        {
+          "key": "warning",
+          "type": "string",
+          "label": {
+            "en": "Warning",
+            "fr": "Avertissement",
+            "de": "Warnung",
+            "es": "Aviso"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Nachricht",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    },
+    {
+      "key": "device_unreachable",
+      "label": {
+        "en": "SYR: not answering",
+        "fr": "SYR : ne répond plus",
+        "de": "SYR: antwortet nicht",
+        "es": "SYR: no responde"
+      },
+      "description": {
+        "en": "The device has not answered 3 readings in a row, for at least a minute (power cut, Wi-Fi lost, new address).",
+        "fr": "L’appareil n’a pas répondu à 3 lectures de suite, pendant au moins une minute (coupure, Wi-Fi perdu, nouvelle adresse).",
+        "de": "Das Gerät hat 3 Abfragen in Folge und mindestens eine Minute lang nicht geantwortet (Stromausfall, WLAN weg, neue Adresse).",
+        "es": "El equipo no ha respondido a 3 lecturas seguidas, durante al menos un minuto (corte, Wi-Fi perdido, nueva dirección)."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for any device.",
+            "fr": "L’appareil SYR. Laissez vide pour n’importe lequel.",
+            "de": "Das SYR-Gerät. Leer lassen für jedes Gerät.",
+            "es": "El equipo SYR. Déjelo vacío para cualquiera."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "address",
+          "type": "string",
+          "label": {
+            "en": "Address",
+            "fr": "Adresse",
+            "de": "Adresse",
+            "es": "Dirección"
+          }
+        },
+        {
+          "key": "failures",
+          "type": "number",
+          "label": {
+            "en": "Failed readings",
+            "fr": "Lectures échouées",
+            "de": "Fehlgeschlagene Abfragen",
+            "es": "Lecturas fallidas"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Nachricht",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    },
+    {
+      "key": "device_back_online",
+      "label": {
+        "en": "SYR: answering again",
+        "fr": "SYR : répond à nouveau",
+        "de": "SYR: antwortet wieder",
+        "es": "SYR: responde de nuevo"
+      },
+      "description": {
+        "en": "The device answers again after it stopped answering.",
+        "fr": "L’appareil répond à nouveau après une interruption.",
+        "de": "Das Gerät antwortet nach einer Unterbrechung wieder.",
+        "es": "El equipo vuelve a responder tras una interrupción."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for any device.",
+            "fr": "L’appareil SYR. Laissez vide pour n’importe lequel.",
+            "de": "Das SYR-Gerät. Leer lassen für jedes Gerät.",
+            "es": "El equipo SYR. Déjelo vacío para cualquiera."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "address",
+          "type": "string",
+          "label": {
+            "en": "Address",
+            "fr": "Adresse",
+            "de": "Adresse",
+            "es": "Dirección"
+          }
+        },
+        {
+          "key": "down_minutes",
+          "type": "number",
+          "label": {
+            "en": "Minutes without answer",
+            "fr": "Minutes sans réponse",
+            "de": "Minuten ohne Antwort",
+            "es": "Minutos sin respuesta"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Message",
+            "fr": "Message",
+            "de": "Nachricht",
+            "es": "Mensaje"
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "set_profile",
+      "timeout_seconds": 30,
+      "label": {
+        "en": "SYR: select a profile",
+        "fr": "SYR : choisir un profil",
+        "de": "SYR: Profil wählen",
+        "es": "SYR: elegir un perfil"
+      },
+      "description": {
+        "en": "Selects a leak protection profile (for example “Away” when the alarm is armed). The number is the one of the profile in the SYR app (1 = first).",
+        "fr": "Sélectionne un profil de protection (par exemple « Absent » quand l’alarme est armée). Le numéro est celui du profil dans l’appli SYR (1 = le premier).",
+        "de": "Wählt ein Schutzprofil (zum Beispiel „Abwesend“, wenn die Alarmanlage scharf ist). Die Nummer ist die des Profils in der SYR-App (1 = das erste).",
+        "es": "Selecciona un perfil de protección (por ejemplo «Ausente» cuando la alarma está activada). El número es el del perfil en la app SYR (1 = el primero)."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": true,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "profile",
+          "type": "number",
+          "required": true,
+          "default": 2,
+          "min": 1,
+          "max": 8,
+          "label": {
+            "en": "Profile number",
+            "fr": "Numéro du profil",
+            "de": "Profilnummer",
+            "es": "Número de perfil"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "profile",
+          "type": "number",
+          "label": {
+            "en": "Profile number",
+            "fr": "Numéro du profil",
+            "de": "Profilnummer",
+            "es": "Número de perfil"
+          }
+        },
+        {
+          "key": "profile_name",
+          "type": "string",
+          "label": {
+            "en": "Profile name",
+            "fr": "Nom du profil",
+            "de": "Profilname",
+            "es": "Nombre del perfil"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "start_microleak_test",
+      "timeout_seconds": 30,
+      "label": {
+        "en": "SYR: microleak test",
+        "fr": "SYR : test de micro-fuite",
+        "de": "SYR: Mikroleckagetest",
+        "es": "SYR: prueba de microfuga"
+      },
+      "description": {
+        "en": "Starts the microleak test: the valve closes about 4 minutes; drawing water meanwhile spoils the test. A leak found raises an alarm.",
+        "fr": "Lance le test de micro-fuite : la vanne se ferme environ 4 minutes ; puiser de l’eau pendant ce temps fausse le test. Une fuite trouvée déclenche une alarme.",
+        "de": "Startet den Mikroleckagetest: Das Ventil schließt etwa 4 Minuten; Wasserentnahme währenddessen verfälscht den Test. Ein gefundenes Leck löst einen Alarm aus.",
+        "es": "Inicia la prueba de microfuga: la válvula se cierra unos 4 minutos; usar agua mientras tanto falsea la prueba. Una fuga encontrada dispara una alarma."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": true,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "reset_alarm",
+      "timeout_seconds": 30,
+      "label": {
+        "en": "SYR: clear the alarm",
+        "fr": "SYR : acquitter l’alarme",
+        "de": "SYR: Alarm quittieren",
+        "es": "SYR: borrar la alarma"
+      },
+      "description": {
+        "en": "Clears the current alarm. The valve stays as it is: open it again with the water supply switch.",
+        "fr": "Acquitte l’alarme en cours. La vanne reste telle quelle : rouvrez-la avec l’interrupteur d’arrivée d’eau.",
+        "de": "Quittiert den aktuellen Alarm. Das Ventil bleibt, wie es ist: Öffne es wieder mit dem Schalter der Wasserzufuhr.",
+        "es": "Borra la alarma actual. La válvula se queda como está: vuelva a abrirla con el interruptor de suministro de agua."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": true,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "previous_alarm",
+          "type": "string",
+          "label": {
+            "en": "Cleared alarm",
+            "fr": "Alarme acquittée",
+            "de": "Quittierter Alarm",
+            "es": "Alarma borrada"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "get_consumption",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "SYR: water used",
+        "fr": "SYR : eau consommée",
+        "de": "SYR: Wasserverbrauch",
+        "es": "SYR: agua consumida"
+      },
+      "description": {
+        "en": "Today’s and yesterday’s water, the meter, the flow now and the valve, for a message or a condition.",
+        "fr": "L’eau d’aujourd’hui et d’hier, le compteur, le débit actuel et la vanne, pour un message ou une condition.",
+        "de": "Wasser von heute und gestern, Zähler, aktueller Durchfluss und Ventil, für eine Nachricht oder eine Bedingung.",
+        "es": "El agua de hoy y de ayer, el contador, el caudal actual y la válvula, para un mensaje o una condición."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "The SYR device. Leave empty for the first one.",
+            "fr": "L’appareil SYR. Laissez vide pour le premier.",
+            "de": "Das SYR-Gerät. Leer lassen für das erste.",
+            "es": "El equipo SYR. Déjelo vacío para el primero."
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": {
+            "en": "Device name",
+            "fr": "Nom de l’appareil",
+            "de": "Gerätename",
+            "es": "Nombre del equipo"
+          }
+        },
+        {
+          "key": "today_liters",
+          "type": "number",
+          "label": {
+            "en": "Liters today",
+            "fr": "Litres aujourd’hui",
+            "de": "Liter heute",
+            "es": "Litros hoy"
+          }
+        },
+        {
+          "key": "yesterday_liters",
+          "type": "number",
+          "label": {
+            "en": "Liters yesterday",
+            "fr": "Litres hier",
+            "de": "Liter gestern",
+            "es": "Litros ayer"
+          }
+        },
+        {
+          "key": "total_m3",
+          "type": "number",
+          "label": {
+            "en": "Meter (m³)",
+            "fr": "Compteur (m³)",
+            "de": "Zähler (m³)",
+            "es": "Contador (m³)"
+          }
+        },
+        {
+          "key": "flow_lpm",
+          "type": "number",
+          "label": {
+            "en": "Flow (L/min)",
+            "fr": "Débit (L/min)",
+            "de": "Durchfluss (L/min)",
+            "es": "Caudal (L/min)"
+          }
+        },
+        {
+          "key": "valve_open",
+          "type": "boolean",
+          "label": {
+            "en": "Water open",
+            "fr": "Eau ouverte",
+            "de": "Wasser offen",
+            "es": "Agua abierta"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    }
+  ]
+}

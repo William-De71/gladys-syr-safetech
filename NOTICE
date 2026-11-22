@@ -1,0 +1,18 @@
+SYR SafeTech integration for Gladys Assistant (gladys-syr-safetech)
+Copyright 2026 William Deren
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It reads the SYR leak protection devices of the user's own local network
+through their local JSON API (port 5333). This integration is not affiliated
+with nor endorsed by Hans Sasserath GmbH & Co. KG (SYR), Hansgrohe, Reliance
+Worldwide or the other brands of the same devices; SYR, SafeTech, Pontos and
+the other names are trademarks of their owners.
+
+The paths, fields, value formats and alarm codes of the local API follow the
+community documentation of alexhass/syr_connect
+(https://github.com/alexhass/syr_connect, Apache-2.0: docs/syrconnect-protocol.md,
+docs/known_issues_json_api.md and its device captures) and of
+ahornung/syr-safetech-connect-api
+(https://github.com/ahornung/syr-safetech-connect-api, MIT), read for the facts
+only: no code is taken from them.

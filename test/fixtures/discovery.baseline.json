@@ -1,0 +1,728 @@
+{
+  "devices": {
+    "trio": {
+      "external_id": "ext:test-integration:syr:112abc00042",
+      "should_poll": false,
+      "params": ["SYR_SERIAL", "SYR_PATH", "SYR_ADDRESS"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:valve",
+          "category": "switch",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": false,
+          "has_feedback": true
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:leak",
+          "category": "leak-sensor",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:alarm",
+          "category": "text",
+          "type": "text",
+          "unit": null,
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:profile",
+          "category": "text",
+          "type": "select",
+          "unit": null,
+          "min": 0,
+          "max": 0,
+          "read_only": false,
+          "has_feedback": true
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:flow",
+          "category": "water-valve",
+          "type": "flow",
+          "unit": "cubic-meter-per-hour",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:pressure",
+          "category": "pressure-sensor",
+          "type": "decimal",
+          "unit": "bar",
+          "min": 0,
+          "max": 25,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:temperature",
+          "category": "temperature-sensor",
+          "type": "decimal",
+          "unit": "celsius",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:total_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "cubicmeter",
+          "min": 0,
+          "max": 10000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:today_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:last_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:current_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:battery",
+          "category": "battery",
+          "type": "integer",
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:112abc00042:battery_low",
+          "category": "battery-low",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "safetech": {
+      "external_id": "ext:test-integration:syr:987650001",
+      "should_poll": false,
+      "params": ["SYR_SERIAL", "SYR_PATH", "SYR_ADDRESS"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:syr:987650001:valve",
+          "category": "switch",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": false,
+          "has_feedback": true
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:leak",
+          "category": "leak-sensor",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:alarm",
+          "category": "text",
+          "type": "text",
+          "unit": null,
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:profile",
+          "category": "text",
+          "type": "select",
+          "unit": null,
+          "min": 0,
+          "max": 0,
+          "read_only": false,
+          "has_feedback": true
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:flow",
+          "category": "water-valve",
+          "type": "flow",
+          "unit": "cubic-meter-per-hour",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:pressure",
+          "category": "pressure-sensor",
+          "type": "decimal",
+          "unit": "bar",
+          "min": 0,
+          "max": 25,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:temperature",
+          "category": "temperature-sensor",
+          "type": "decimal",
+          "unit": "celsius",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:total_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "cubicmeter",
+          "min": 0,
+          "max": 10000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:today_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:last_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:current_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:987650001:battery_low",
+          "category": "battery-low",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "pontos": {
+      "external_id": "ext:test-integration:syr:000000777",
+      "should_poll": false,
+      "params": ["SYR_SERIAL", "SYR_PATH", "SYR_ADDRESS"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:syr:000000777:leak",
+          "category": "leak-sensor",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:alarm",
+          "category": "text",
+          "type": "text",
+          "unit": null,
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:profile",
+          "category": "text",
+          "type": "select",
+          "unit": null,
+          "min": 0,
+          "max": 0,
+          "read_only": false,
+          "has_feedback": true
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:flow",
+          "category": "water-valve",
+          "type": "flow",
+          "unit": "cubic-meter-per-hour",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:pressure",
+          "category": "pressure-sensor",
+          "type": "decimal",
+          "unit": "bar",
+          "min": 0,
+          "max": 25,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:temperature",
+          "category": "temperature-sensor",
+          "type": "decimal",
+          "unit": "celsius",
+          "min": 0,
+          "max": 100,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:total_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "cubicmeter",
+          "min": 0,
+          "max": 10000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:today_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:last_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:current_volume",
+          "category": "volume-sensor",
+          "type": "decimal",
+          "unit": "liter",
+          "min": 0,
+          "max": 1000000,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:syr:000000777:battery_low",
+          "category": "battery-low",
+          "type": "binary",
+          "unit": null,
+          "min": 0,
+          "max": 1,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    }
+  },
+  "manifest": {
+    "config_schema": [
+      {
+        "key": "intro",
+        "type": "section"
+      },
+      {
+        "key": "hosts",
+        "type": "string"
+      },
+      {
+        "key": "options",
+        "type": "section"
+      },
+      {
+        "key": "interval",
+        "type": "select"
+      },
+      {
+        "key": "language",
+        "type": "select"
+      }
+    ],
+    "actions": ["search", "diagnostic"],
+    "action_fields": {
+      "search": [],
+      "diagnostic": []
+    },
+    "widgets": [
+      {
+        "key": "overview",
+        "settings": ["device"],
+        "options": {}
+      },
+      {
+        "key": "consumption",
+        "settings": ["device"],
+        "options": {}
+      }
+    ],
+    "scene_triggers": [
+      {
+        "key": "leak_detected",
+        "fields": [
+          {
+            "key": "device",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "device",
+            "type": "string"
+          },
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "code",
+            "type": "string"
+          },
+          {
+            "key": "alarm",
+            "type": "string"
+          },
+          {
+            "key": "leak",
+            "type": "boolean"
+          },
+          {
+            "key": "valve_closed",
+            "type": "boolean"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "alarm_raised",
+        "fields": [
+          {
+            "key": "device",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "device",
+            "type": "string"
+          },
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "code",
+            "type": "string"
+          },
+          {
+            "key": "alarm",
+            "type": "string"
+          },
+          {
+            "key": "leak",
+            "type": "boolean"
+          },
+          {
+            "key": "valve_closed",
+            "type": "boolean"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "alarm_cleared",
+        "fields": [
+          {
+            "key": "device",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "device",
+            "type": "string"
+          },
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "code",
+            "type": "string"
+          },
+          {
+            "key": "alarm",
+            "type": "string"
+          },
+          {
+            "key": "leak",
+            "type": "boolean"
+          },
+          {
+            "key": "valve_closed",
+            "type": "boolean"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "warning_raised",
+        "fields": [
+          {
+            "key": "device",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "device",
+            "type": "string"
+          },
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "code",
+            "type": "string"
+          },
+          {
+            "key": "warning",
+            "type": "string"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "device_unreachable",
+        "fields": [
+          {
+            "key": "device",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "device",
+            "type": "string"
+          },
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "address",
+            "type": "string"
+          },
+          {
+            "key": "failures",
+            "type": "number"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "device_back_online",
+        "fields": [
+          {
+            "key": "device",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "device",
+            "type": "string"
+          },
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "address",
+            "type": "string"
+          },
+          {
+            "key": "down_minutes",
+            "type": "number"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "scene_actions": [
+      {
+        "key": "set_profile",
+        "fields": ["device", "profile"],
+        "outputs": [
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "profile",
+            "type": "number"
+          },
+          {
+            "key": "profile_name",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "start_microleak_test",
+        "fields": ["device"],
+        "outputs": [
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "reset_alarm",
+        "fields": ["device"],
+        "outputs": [
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "previous_alarm",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "get_consumption",
+        "fields": ["device"],
+        "outputs": [
+          {
+            "key": "device_name",
+            "type": "string"
+          },
+          {
+            "key": "today_liters",
+            "type": "number"
+          },
+          {
+            "key": "yesterday_liters",
+            "type": "number"
+          },
+          {
+            "key": "total_m3",
+            "type": "number"
+          },
+          {
+            "key": "flow_lpm",
+            "type": "number"
+          },
+          {
+            "key": "valve_open",
+            "type": "boolean"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+  }
+}
